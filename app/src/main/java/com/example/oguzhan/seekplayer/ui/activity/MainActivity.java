@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.oguzhan.seekplayer.R;
+import com.example.oguzhan.seekplayer.base.BaseActivity;
 import com.example.oguzhan.seekplayer.interfaces.MainView;
 import com.example.oguzhan.seekplayer.models.Post;
 import com.example.oguzhan.seekplayer.presenters.MainPresenter;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
  * Created by oguzhan on 23.12.2017.
  */
 
-public class MainActivity extends AppCompatActivity implements MainView, View.OnClickListener {
+public class MainActivity extends BaseActivity implements MainView, View.OnClickListener {
 
     @BindView(R.id.editText)
     EditText postNumberEdtxt;
@@ -46,8 +47,7 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+
 
         getPostBtn.setOnClickListener(this);
         getCommentBtn.setOnClickListener(this);
@@ -55,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements MainView, View.On
         presenter = new MainPresenter(this,new RestClientManager(new RetrofitManager()));
         //you can use other restclient library here.
         //to do that, replace RetrofitManager class with different implementation
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.activity_main;
     }
 
 
